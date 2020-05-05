@@ -65,13 +65,13 @@ function onDoctorSaveComplete(response, status)
 		$("#formDoctor")[0].reset();
 		
 }
-// UPDATE==========================================
+//UPDATE==========================================
 $(document).on("click", ".btnUpdate", function(event) {
     $("#hidDoctorIDSave").val($(this).closest("tr").find('#hidDoctorIDUpdate').val());
-    $("#name").val($(this).closest("tr").find('td:eq(0)').text());
-    $("#age").val($(this).closest("tr").find('td:eq(1)').text());
-    $("#mail").val($(this).closest("tr").find('td:eq(2)').text());
-    $("#speciality").val($(this).closest("tr").find('td:eq(3)').text());
+    $("#doctorName").val($(this).closest("tr").find('td:eq(0)').text());
+    $("#doctorAge").val($(this).closest("tr").find('td:eq(1)').text());
+    $("#doctorMail").val($(this).closest("tr").find('td:eq(2)').text());
+    $("#doctorSpeciality").val($(this).closest("tr").find('td:eq(3)').text());
     $("#MediRegNo").val($(this).closest("tr").find('td:eq(4)').text());
     $("#workedHospital").val($(this).closest("tr").find('td:eq(5)').text());
 });
