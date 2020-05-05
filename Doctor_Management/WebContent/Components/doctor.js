@@ -75,6 +75,47 @@ $(document).on("click", ".btnUpdate", function(event) {
     $("#MediRegNo").val($(this).closest("tr").find('td:eq(4)').text());
     $("#workedHospital").val($(this).closest("tr").find('td:eq(5)').text());
 });
+//REMOVE==================================================
+$(document).on("click", ".btnRemove", function(event)
+		{
+		$.ajax(
+		{
+		url : "DoctorAPI",
+		type : "DELETE",
+		data : "doctorID=" + $(this).data("doctorid"),
+		dataType : "text",
+		complete : function(response, status)
+		{
+		onDoctorDeleteComplete(response.responseText, status);
+		}
+	});
+});
+
+function onDoctorDeleteComplete(response, status)
+{
+if (status == "success")
+	{
+		var resultSet = JSON.parse(response);
+		if (resultSet.status.trim() == "success")
+			{
+				$("#alertSuccess").text("Successfully deleted.");
+				$("#alertSuccess").show();
+				$("#divDoctorGrid").html(resultSet.data);
+			} else if (resultSet.status.trim() == "error")
+			{
+				$("#alertError").text(resultSet.data);
+				$("#alertError").show();
+			}
+	} else if (status == "error")
+	{
+		$("#alertError").text("Error while deleting.");
+		$("#alertError").show();
+	} else
+	{
+		$("#alertError").text("Unknown error while deleting..");
+		$("#alertError").show();
+	}
+}
 // CLIENTMODEL=========================================================================
 function validateDoctorForm() {
 
