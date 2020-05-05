@@ -176,11 +176,12 @@ public class Doctor
 			preparedStmt.execute();
 			con.close();
 		
-			output = "Deleted successfully";
+			String newDoctor = readDoctor();
+			output = "{\"status\":\"success\", \"data\": \"" + newDoctor + "\"}";
 		}
 		catch (Exception e)
 		{
-			output = "Error while deleting the doctor details.";
+			output = "{\"status\":\"error\", \"data\":\"Error while deleting the doctor details.\"}";
 			System.err.println(e.getMessage());
 		}
 		
