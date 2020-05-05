@@ -1,54 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="com.Doctor" %>  
-<% 
-	//Initialize--------------------------
-	session.setAttribute("statusMsg","");
-	System.out.println("Trying to process...");
-
-	//Save------------------------------------
-   if (request.getParameter("name") != null) {
-	Doctor Doctor_1 = new Doctor();
-    String
-    stsMsg = "";
-    
-    //Insert--------------------------
-    if (request.getParameter("hidDoctorIDSave") == "") {
-        stsMsg = Doctor_1.insertDoctor(request.getParameter("name"),
-                request.getParameter("age"), request
-                        .getParameter("mail"), request
-                        .getParameter("speciality"), request
-                        .getParameter("MediRegNo"), request
-                        .getParameter("workedHospital"));
-    } else//Update----------------------
-    {
-        stsMsg = Doctor_1.updateDoctor(request.getParameter("hidDoctorIDSave"),
-                        request.getParameter("name"), request
-                                .getParameter("age"), request
-                                .getParameter("mail"), request
-                                .getParameter("speciality"), request
-                                .getParameter("MediRegNo"), request
-                                .getParameter("workedHospital"));
-    }
-    session.setAttribute("statusMsg", stsMsg);
-   }
-   //Delete--------------------------------
-   if (request.getParameter("hidDoctorIDDelete") != null) {
-	Doctor
-	Doctor_1 = new Doctor();
-    String stsMsg = Doctor_1.deleteDoctor(request.getParameter("hidDoctorIDDelete"));
-    session.setAttribute("statusMsg", stsMsg);
-   }
-   %>    	 
+  	 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Health Care Management</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="./Components/doctor.js"></script>
+<link rel="stylesheet" href="Views/bootstrap.min.css">
+<script src="Components/jquery.min.js"></script>
+<script src="Components/doctor.js"></script>
   <style>
 body {
   background-color: #E6E6FA;
