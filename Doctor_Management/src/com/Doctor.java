@@ -113,44 +113,45 @@ public class Doctor
 		return output;
 	}
 		
-		public String updateDoctor(String doctorID, String name, String age, String mail, String speciality, String MediRegNo, String workedHospital)
-		{
-		String output = "";
-		
-		try
-		{
-				Connection con = connect();
-				
-				if (con == null)
-				{return "Error while connecting to the database for updating."; }
-		
-				// create a prepared statement
-				String query = "UPDATE doctor SET doctorName=?,doctorAge=?,doctorMail=?,doctorSpeciality=?,MediRegNo=?,workedHospital=?	 WHERE doctorID=?";
-								
-				PreparedStatement preparedStmt = con.prepareStatement(query);
-		
-				// binding values
-				preparedStmt.setString(1, name);
-				preparedStmt.setString(2, age);
-				preparedStmt.setString(3, mail);
-				preparedStmt.setString(4, speciality);
-				preparedStmt.setString(5, MediRegNo);
-				preparedStmt.setString(6, workedHospital);
-				preparedStmt.setInt(7, Integer.parseInt(doctorID));
-		
-				// execute the statement
-				preparedStmt.execute();
-				con.close();
-		
-				output = "Updated successfully";
-		}
-		catch (Exception e)
-		{
-			output = "Error while updating the doctor details.";
-			System.err.println(e.getMessage());
-		}
-			return output;
+	public String updateDoctor(String doctorID, String name, String age, String mail, String speciality, String MediRegNo, String workedHospital)
+	{
+	String output = "";
+	
+	try
+	{
+			Connection con = connect();
+			
+			if (con == null)
+			{return "Error while connecting to the database for updating."; }
+	
+			// create a prepared statement
+			String query = "UPDATE doctor SET doctorName=?,doctorAge=?,doctorMail=?,doctorSpeciality=?,MediRegNo=?,workedHospital=?	 WHERE doctorID=?";
+							
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+	
+			// binding values
+			preparedStmt.setString(1, name);
+			preparedStmt.setString(2, age);
+			preparedStmt.setString(3, mail);
+			preparedStmt.setString(4, speciality);
+			preparedStmt.setString(5, MediRegNo);
+			preparedStmt.setString(6, workedHospital);
+			preparedStmt.setInt(7, Integer.parseInt(doctorID));
+	
+			// execute the statement
+			preparedStmt.execute();
+			con.close();
+	
+			String newDoctor = readDoctor();
+			output = "{\"status\":\"success\",\"data\":\""+newDoctor+"\"}";
 	}
+	catch (Exception e)
+	{
+		output = "{\"status\":\"error\",\"data\":\"Error while updating the doctor details.\"}";
+		System.err.println(e.getMessage());
+	}
+		return output;
+}
 	
 	public String deleteDoctor(String doctorID)
 	{
