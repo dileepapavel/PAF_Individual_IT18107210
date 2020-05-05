@@ -60,62 +60,58 @@ public class Doctor
 			return output;
 		}
 		
-		public String readDoctor()
+	public String readDoctor()
+	{
+		String output = "";
+			
+		try
 		{
-			String output = "";
-				
-			try
+			Connection con = connect();
+			if (con == null)
+			{return "Error while connecting to the database for reading."; }
+			
+			// Prepare the html table to be displayed
+			output = "<table border='1'><tr><th>Doctor Name</th><th>Age</th><th>Doctor Mail</th><th>Doctor Speciality</th><th>Medical Registration No</th><th>Hospitals worked in</th><th>Update</th><th>Remove</th></tr>";
+			
+			String query = "select * from doctor";
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			
+			// iterate through the rows in the result set
+			while (rs.next())
 			{
-				Connection con = connect();
-				if (con == null)
-				{return "Error while connecting to the database for reading."; }
+				String doctorID = Integer.toString(rs.getInt("doctorID"));
+				String doctorName = rs.getString("doctorName");
+				String doctorAge = rs.getString("doctorAge");
+				String doctorMail =rs.getString("doctorMail");
+				String doctorSpeciality = rs.getString("doctorSpeciality");
+				String MediRegNo = rs.getString("MediRegNo");
+				String workedHospital = rs.getString("workedHospital");
 				
-				// Prepare the html table to be displayed
-				output = "<table border=\"1\"><tr><th>Doctor Name</th><th>Age</th><th>Doctor Mail</th><th>Doctor Speciality</th><th>Medical Registration No</th><th>Hospitals worked in</th><th>Update</th><th>Remove</th></tr>";
-				
-				String query = "select * from doctor";
-				Statement stmt = con.createStatement();
-				ResultSet rs = stmt.executeQuery(query);
-				
-				// iterate through the rows in the result set
-				while (rs.next())
-				{
-					String doctorID = Integer.toString(rs.getInt("doctorID"));
-					String doctorName = rs.getString("doctorName");
-					String doctorAge = rs.getString("doctorAge");
-					String doctorMail =rs.getString("doctorMail");
-					String doctorSpeciality = rs.getString("doctorSpeciality");
-					String MediRegNo = rs.getString("MediRegNo");
-					String workedHospital = rs.getString("workedHospital");
-					
-					// Add into the html table
-					output += "<tr><td><input id=\"hidDoctorIDUpdate\"name=\"hidDoctorIDUpdate\"type=\"hidden\" value=\"" + doctorID + "\">"
-                            + doctorName + "</td>";
-					output += "<td>" + doctorAge + "</td>";
-					output += "<td>" + doctorMail + "</td>";
-					output += "<td>" + doctorSpeciality + "</td>";
-					output += "<td>" + MediRegNo + "</td>";
-					output += "<td>" + workedHospital + "</td>";
-				
-					// buttons
-					output += "<td><input name=\"btnUpdate\" type=\"submit\"value=\"Update\" class=\"btn btn-warning btnUpdate\"></td>"
-									+ "<td><form method=\"post\" action=\"doctor.jsp\">"
-									+ "<input name=\"btnRemove\" type=\"submit\" value=\"Remove\"class=\"btn btn-danger\">"
-									+ "<input name=\"hidDoctorIDDelete\" type=\"hidden\" value=\"" + doctorID + "\">" + "</form></td></tr>";
-				}
-				
-				con.close();
-				
-				// Complete the html table
-				output += "</table>";
+				// Add into the html table
+				output += "<tr><td><input id='hidDoctorIDUpdate'name='hidDoctorIDUpdate' type='hidden' value='"+doctorID+"'>"+doctorName+"</td>";
+				output += "<td>" +doctorAge+"</td>";
+				output += "<td>" +doctorMail+"</td>";
+				output += "<td>" +doctorSpeciality+"</td>";
+				output += "<td>" +MediRegNo+"</td>";
+				output += "<td>" +workedHospital+"</td>";
+			
+				// buttons
+				output += "<td><input name='btnUpdate' type='button' value='Update'class='btnUpdate btn btn-secondary'></td>"+"<td><input name='btnRemove'type='button' value='Remove'class='btnRemove btn btn-danger'data-doctorid='"+ doctorID + "'>" + "</td></tr>";
 			}
-			catch (Exception e)
-			{
-				output = "Error while reading the doctor details.";
-				System.err.println(e.getMessage());
-			}
-			return output;
+			
+			con.close();
+			
+			// Complete the html table
+			output += "</table>";
 		}
+		catch (Exception e)
+		{
+			output = "Error while reading the doctor details.";
+			System.err.println(e.getMessage());
+		}
+		return output;
+	}
 		
 		public String updateDoctor(String doctorID, String name, String age, String mail, String speciality, String MediRegNo, String workedHospital)
 		{
