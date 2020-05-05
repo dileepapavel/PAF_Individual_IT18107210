@@ -18,6 +18,7 @@ public class Doctor
 		return con;
 	}
 
+
 	public String insertDoctor(String name, String age, String mail, String speciality, String MediRegNo, String workedHospital)
 	{
 		String output = "";
@@ -27,18 +28,19 @@ public class Doctor
 				if (con == null)
 				{return "Error while connecting to the database for inserting."; }
 				// create a prepared statement
-				String query = " insert into doctor(`doctorName`,`doctorAge`,`doctorMail`,`doctorSpeciality`,`MediRegNo`,`workedHospital`)"
-						+ " values (?, ?, ?, ?, ?, ?)";
+				String query = " insert into doctor(`doctorID`,`doctorName`,`doctorAge`,`doctorMail`,`doctorSpeciality`,`MediRegNo`,`workedHospital`)"
+						+ " values (?, ?, ?, ?, ?, ?, ?)";
 				
 				PreparedStatement preparedStmt = con.prepareStatement(query);
 				
 				// binding values
-				preparedStmt.setString(1, name );
-				preparedStmt.setString(2, age);
-				preparedStmt.setString(3, mail);
-				preparedStmt.setString(4, speciality);
-				preparedStmt.setString(5, MediRegNo);
-				preparedStmt.setString(6, workedHospital);
+				preparedStmt.setInt(1, 0);
+				preparedStmt.setString(2, name );
+				preparedStmt.setString(3, age);
+				preparedStmt.setString(4, mail);
+				preparedStmt.setString(5, speciality);
+				preparedStmt.setString(6, MediRegNo);
+				preparedStmt.setString(7, workedHospital);
 				
 				
 
@@ -46,11 +48,12 @@ public class Doctor
 				preparedStmt.execute();
 				con.close();
 				
-				output = "Inserted successfully";
+				String newDoctor = readDoctor();
+				output = "{\"status\":\"success\",\"data\":\""+newDoctor+"\"}";
 			}
 			catch (Exception e)
 			{
-				output = "Error while inserting the doctor details.";
+				output = "{\"status\":\"error\", \"data\":\"Error while inserting the doctor details.\"}";
 				System.err.println(e.getMessage());
 			}
 			
