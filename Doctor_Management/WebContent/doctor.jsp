@@ -63,43 +63,37 @@ body {
 		
 		<h2>Doctor Register Details</h2><br><br>
 		
-		<form class="formDoctor" name="formDoctor" method="post" action="doctor.jsp">
-				<div class="form-group">
-				
-					<label for="name">Doctor Name:</label>
-					<input type="text" class="form-control"  id="name" placeholder="Enter your name" name="name"><br>
+			<form id="formDoctor" name="formDoctor">
+					Doctor Name:
+					<input type="text" class="form-control form-control-sm"  id="doctorName" placeholder="Enter your name" name="doctorName"><br>
 					
-					<label for="age">Doctor Age:</label>
-					<input type="text" class="form-control"  id="age" placeholder="Enter your age" name="age"><br>
+					Doctor Age:
+					<input type="text" class="form-control form-control-sm"  id="doctorAge" placeholder="Enter your age" name="doctorAge"><br>
 					
-					<label for="mail">Mail:</label>
-					<input type="text" class="form-control" id="mail" placeholder="Enter your mail" name="mail"><br>
+					Mail:
+					<input type="text" class="form-control form-control-sm" id="doctorMail" placeholder="Enter your mail" name="doctorMail"><br>
 					
-					<label for="speciality">Speciality:</label>
-					<input type="text" class="form-control" id="speciality" placeholder="Enter your speciality" name="speciality"><br>
+					Speciality:
+					<input type="text" class="form-control form-control-sm" id="doctorSpeciality" placeholder="Enter your speciality" name="doctorSpeciality"><br>
 					
-					<label for="MediRegNo">Medical Registration Number:</label>
-					<input type="text" class="form-control" id="MediRegNo" placeholder="Enter your medical registration number " name="MediRegNo"><br>
+					Medical Registration Number:
+					<input type="text" class="form-control form-control-sm" id="MediRegNo" placeholder="Enter your medical registration number " name="MediRegNo"><br>
 								
-					<label for="workedHospital">Hospitals that you have worked:</label>
-					<input type="text" class="form-control" id="workedHospital" placeholder="Enter your hospitals that you have worked" name="workedHospital"><br>
+					Hospitals that you have worked:
+					<input type="text" class="form-control form-control-sm" id="workedHospital" placeholder="Enter your hospitals that you have worked" name="workedHospital"><br>
 								
-					<input id="btnSave" name="btnSave" type="submit" value="Save"
-			        class="btn btn-primary"> 
+					<input id="btnSave" name="btnSave" type="button" value="Save" class="btn btn-primary"> 
 					<input type="hidden" id="hidDoctorIDSave" name="hidDoctorIDSave" value="">					
-				</div>
 			</form>
-			<div id="alertSuccess" class="alert alert-success">
-		            <%
-			          out.print(session.getAttribute("statusMsg"));
-	             	%>
-	        </div>
-	        <div id="alertError" class="alert alert-danger"></div>
+				<div id="alertSuccess" class="alert alert-success"></div>
+	        	<div id="alertError" class="alert alert-danger"></div>
 	        <br>
+	        	<div id="DoctorGrid">
 	        	<%
 	                Doctor doctorObj = new Doctor();
 	                out.print(doctorObj.readDoctor());
              	%>
+             	</div>
 	       </div>  
 	       </div>
 	       </div>
