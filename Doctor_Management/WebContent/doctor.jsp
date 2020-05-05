@@ -49,7 +49,7 @@ body {
 				<div id="alertSuccess" class="alert alert-success"></div>
 	        	<div id="alertError" class="alert alert-danger"></div>
 	        <br>
-	        	<div id="DoctorGrid">
+	        	<div id="divDoctorGrid">
 	        	<%
 	                Doctor doctorObj = new Doctor();
 	                out.print(doctorObj.readDoctor());
