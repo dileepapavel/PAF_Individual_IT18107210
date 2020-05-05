@@ -116,22 +116,22 @@ if (status == "success")
 		$("#alertError").show();
 	}
 }
-// CLIENTMODEL=========================================================================
+//CLIENTMODEL=========================================================================
 function validateDoctorForm() {
 
-    if ($("#name").val().trim() == "") {
+    if ($("#doctorName").val().trim() == "") {
         return "Insert doctor name.";
     }
 
-    if ($("#age").val().trim() == "") {
+    if ($("#doctorAge").val().trim() == "") {
         return "Insert doctor age.";
     }
 
-    if ($("#mail").val().trim() == "") {
+    if ($("#doctorMail").val().trim() == "") {
         return "Insert doctor mail.";
     }
 
-    if ($("#speciality").val().trim() == "") {
+    if ($("#doctorSpeciality").val().trim() == "") {
         return "Insert doctor speciality.";
     }
 
