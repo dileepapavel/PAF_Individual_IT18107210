@@ -6,7 +6,8 @@ $(document).ready(function() {
     $("#alertError").hide();
 });
 // SAVE ============================================
-$(document).on("click", "#btnSave", function(event) {
+$(document).on("click", "#btnSave", function(event) 
+{
     // Clear alerts---------------------
     $("#alertSuccess").text("");
     $("#alertSuccess").hide();
@@ -21,8 +22,49 @@ $(document).on("click", "#btnSave", function(event) {
         return;
     }
     // If valid------------------------
-    $("#formDoctor").submit();
+    var type = ($("#hidDoctorIDSave").val() == "") ? "POST" : "PUT";
+    $.ajax(
+    	{
+    		url : "DoctorAPI",
+    		type : type,
+    		data : $("#formDoctor").serialize(),
+    		dataType : "text",
+    		complete : function(response, status)
+    		{
+    		onDoctorSaveComplete(response.responseText, status);
+    		}
+    	});
 });
+
+function onDoctorSaveComplete(response, status)
+{
+	if(status == "success" ){
+		var resultSet =JSON.parse(response);
+		
+		if (resultSet.status.trim() == "success")
+			{
+				$("#alertSuccess").text("Successfully saved.");
+				$("#alertSuccess").show();
+				
+				$("#divDoctorGrid").html(resultSet.data);
+			}else if (resultSet.status.trim() == "error")
+			{
+				$("#alertError").text(resultSet.data);
+				$("#alertError").show();
+			}
+	}else if (status == "error")
+			{
+				$("#alertError").text("Error while saving.");
+				$("#alertError").show();
+			} else
+			{
+				$("#alertError").text("Unknown error while saving..");
+				$("#alertError").show();
+			}
+		$("#hidDoctorIDSave").val("");
+		$("#formDoctor")[0].reset();
+		
+}
 // UPDATE==========================================
 $(document).on("click", ".btnUpdate", function(event) {
     $("#hidDoctorIDSave").val($(this).closest("tr").find('#hidDoctorIDUpdate').val());
