@@ -12,17 +12,25 @@
 <script src="Components/doctor.js"></script>
   <style>
 body {
-  background-color: #E6E6FA;
+  background-color: lightblue;
+  margin: 20px;
+  padding: 20px;
+}
+divDoctorGrid.{
+	padding: 20px;
+	text-align: center;
+	border-spacing: 5px;
 }
 </style>
+
 </head>
 <body >
-<h1 style="font-family:verdana">Health Care Management</h1><br><br>
-	<div class="container">
-	<div class="row">
+<h1 style="text-align:center" style="font-family:verdana"><b>Health Care Management</b></h1><br><br>
+	<div class="form-group">
+	<div class="">
 	<div class="col-6">
 		
-		<h2>Doctor Register Details</h2><br><br>
+		<h2>Doctor Register Details</h2>
 		
 			<form id="formDoctor" name="formDoctor">
 					Doctor Name:
@@ -49,17 +57,19 @@ body {
 				<div id="alertSuccess" class="alert alert-success"></div>
 	        	<div id="alertError" class="alert alert-danger"></div>
 	        <br>
-	        	<div id="divDoctorGrid">
-	        	<%
-	                Doctor doctorObj = new Doctor();
-	                out.print(doctorObj.readDoctor());
-             	%>
-             	</div>
+	        
+	        	
 	       </div>  
 	       </div>
 	       </div>
 				   
 </body>
+				<div id="divDoctorGrid">
+	        	<%
+	                Doctor doctorObj = new Doctor();
+	                out.print(doctorObj.readDoctor());
+             	%>
+             	</div>
 </html>
 
 

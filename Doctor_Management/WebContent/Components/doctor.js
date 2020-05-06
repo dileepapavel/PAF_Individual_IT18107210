@@ -130,6 +130,11 @@ function validateDoctorForm() {
     if ($("#doctorMail").val().trim() == "") {
         return "Insert doctor mail.";
     }
+    var emailReg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+	var tmpEmail =  $("#doctorMail").val().trim();
+	if(!tmpEmail.match(emailReg)){
+		return "Insert a valid Email...!";
+	}
 
     if ($("#doctorSpeciality").val().trim() == "") {
         return "Insert doctor speciality.";
