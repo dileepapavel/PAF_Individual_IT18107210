@@ -18,19 +18,27 @@ body {
 }
 divDoctorGrid.{
 	padding: 20px;
-	text-align: center;
+	text-align:center;
 	border-spacing: 5px;
 }
 </style>
-
 </head>
 <body >
-<h1 style="text-align:center" style="font-family:verdana"><b>Health Care Management</b></h1><br><br>
+<nav class ="navbar navbar-default" role="navigation">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="#"><h1><b>Health Care System</b></h1></a>
+	<div class="navbar-header navbar-right">
+		<ul class="nav navbar-nav">
+			<li><a href="#"><b>Home</b></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href="#"><b>Doctor</b></a></li>
+		</ul>
+	</div>
+	</div>
+</nav>
 	<div class="form-group">
 	<div class="">
 	<div class="col-6">
 		
-		<h2>Doctor Register Details</h2>
+		<h4>Doctor Register Details</h4>
 		
 			<form id="formDoctor" name="formDoctor">
 					Doctor Name:
